@@ -31,7 +31,13 @@ var DonateBookView = Backbone.View.extend({
     $.post(formToPost.attr("action"), formToPost.serialize(), $.proxy(this.updateBookView, this));
   },
 
-  updateBookView: function(responseText) {
+    _alwaysFocusInput: function () {
+        $('body').click(function (element) {
+            $(".donate .section:visible").find("input.barcode").focus();
+        });
+    },
+
+    updateBookView: function(responseText) {
     $(this.el).find(".book-info").replaceWith(responseText);
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
